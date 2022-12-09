@@ -1,9 +1,8 @@
-import tasks from "./scripts/coordinator";
-// import Task from "./scripts/tasks";
-// import addTask from "./scripts/add";
+// import tasks from "./scripts/coordinator";
+import createTitleBar from "./scripts/titleBar";
 
-// const content = document.getElementById("content");
+import "./styles/style.css";
 
-console.log(tasks);
+const content = document.getElementById("content");
 
-// tasks.forEach((task) => (content.textContent = task.title));
+content.appendChild(createTitleBar());
