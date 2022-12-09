@@ -7,4 +7,4 @@ import "./styles/style.css";
 const content = document.getElementById("content");
 
 content.appendChild(createTitleBar());
-content.appendChild(createSideBar().divs);
+content.appendChild(createSideBar());

@@ -1,6 +1,30 @@
 .sidebar {
-  border: 2px solid black;
   box-sizing: border-box;
   min-height: 100%;
-  /* width: 200px; */
+  background-color: #eee;
+}
+
+.sidebar>h1 {
+  font-size: 25px;
+  margin: 10px 20px;
+  padding: 5px;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  font-size: 17px;
+  margin: 10px 20px;
+  padding: 5px;
+  gap: 7px;
+}
+
+.tab:hover {
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 7px;
+}
+
+.tab>img {
+  width: 30px;
 }
