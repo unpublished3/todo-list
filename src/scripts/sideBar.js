@@ -3,9 +3,9 @@ import Date from "./../assets/date.png";
 import Week from "./../assets/week.png";
 import Month from "./../assets/month.png";
 
-const createSideBar = () => {
+const createSideBar = (tasks) => {
   const divs = document.createElement("div");
-  divs.classList.add("sidebar");
+  divs.id = "sidebar";
 
   divs.appendChild(createTab(Date, "calendar-date-icon", "Today"));
   divs.appendChild(createTab(Week, "calendar-icon", "This Week"));
@@ -16,10 +16,14 @@ const createSideBar = () => {
 
   divs.appendChild(projects);
 
+  for (const key in tasks) {
+    divs.appendChild(createTab("", "", key));
+  }
+
   return divs;
 };
 
-function createTab(icon = "", imageAlt, tabText) {
+function createTab(icon, imageAlt, tabText) {
   const tab = document.createElement("div");
   tab.classList.add("tab");
 
@@ -36,3 +40,4 @@ function createTab(icon = "", imageAlt, tabText) {
 }
 
 export default createSideBar;
+export { createTab };
