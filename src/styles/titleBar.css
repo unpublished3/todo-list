@@ -1,16 +1,18 @@
 .title-bar {
-  width: 100%;
+  width: 100vw;
   background-color: #E74738;
-  font-size: 40px;
+  font-size: 30px;
   padding: 10px 30px;
   color: white;
   display:  flex;
   align-items: center;
   gap: 50px;
+  box-sizing: border-box;
+  grid-column: 1 / -1;
 }
 
 .ham {
-  height: 45px;
+  height: 35px;
 }
 .ham:hover {
   cursor: pointer;

@@ -7,4 +7,12 @@
   font-family: "Tisa Sans";
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+}
+
+#content {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 61px 1fr;
+  min-height: 100vh;
 }
