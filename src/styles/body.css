@@ -19,20 +19,40 @@ main>ul {
 
 .priority-1, .priority-2, .priority-3 {
   background-color: #f0f0f0;
-  /* border: 1px solid #bdbbbb; */
   padding: 10px 5px;
   display: flex;
   align-items: center;
 }
 
 .priority-1 {
-  border-left:3px solid red;
+  border-left:3px solid #f00;
 }
 
 .priority-2 {
-  border-left:3px solid blue;
+  border-left:3px solid #00f;
 }
 
 .priority-3 {
-  border-left:3px solid green;
+  border-left:3px solid #019001;
+}
+
+input[type=checkbox] {
+  appearance: none;
+  height: 23px;
+  width: 23px;
+  background-color: #c3c2c2;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+input[type=checkbox]:checked {
+  background-image: url("./../assets/check.png");
+  font-weight: 900;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-position: center;
+  background-size: 26px;
+  background-repeat: no-repeat;
 }
