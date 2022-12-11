@@ -27,21 +27,30 @@ function createAllTasks(task) {
   const taskContainer = document.createElement("div");
   taskContainer.classList.add("task-container");
 
+  const front = document.createElement("div");
+
   const check = document.createElement("input");
   check.type = "checkbox";
-  check.classList.add("css-checkbox");
+  check.checked = task.check;
 
   const title = document.createElement("span");
   title.textContent = task.title;
 
+  front.appendChild(check);
+  front.appendChild(title);
+
   const dueDate = document.createElement("text");
   dueDate.textContent = task.dueDate;
+  dueDate.classList.add("date");
 
-  taskContainer.appendChild(check);
-  taskContainer.appendChild(title);
-  taskContainer.appendChild(dueDate);
-  taskContainer.appendChild(createImage(Pencil, "pencil"));
-  taskContainer.appendChild(createImage(Trash, "trash"));
+  const back = document.createElement("div");
+
+  back.appendChild(dueDate);
+  back.appendChild(createImage(Pencil, "pencil"));
+  back.appendChild(createImage(Trash, "trash"));
+
+  taskContainer.appendChild(front);
+  taskContainer.appendChild(back);
 
   taskContainer.classList.add(`priority-${task.priority}`);
   return taskContainer;
