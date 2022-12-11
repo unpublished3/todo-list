@@ -1,7 +1,8 @@
 import "./../styles/sideBar.css";
 import Date from "./../assets/date.png";
-import Week from "./../assets/week.png";
+import Month from "./../assets/month.png";
 import All from "./../assets/all.png";
+import Week from "./../assets/week.png";
 
 const createSideBar = (tasks) => {
   const divs = document.createElement("div");
@@ -10,6 +11,7 @@ const createSideBar = (tasks) => {
   divs.appendChild(createTab(All, "calendar-icon", "All"));
   divs.appendChild(createTab(Date, "calendar-date-icon", "Today"));
   divs.appendChild(createTab(Week, "calendar-icon", "This Week"));
+  divs.appendChild(createTab(Month, "calendar-icon", "This Month"));
 
   const projects = document.createElement("h1");
   projects.textContent = "Projects";
@@ -36,6 +38,7 @@ function createTab(icon, imageAlt, tabText) {
 
   tab.appendChild(newImage);
   tab.appendChild(text);
+  tab.id = tabText;
   return tab;
 }
 

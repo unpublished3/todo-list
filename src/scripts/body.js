@@ -1,5 +1,6 @@
 import tasks from "./coordinator";
 import "./../styles/body.css";
+import { differenceInWeeks, differenceInCalendarMonths } from "date-fns";
 
 import Pencil from "./../assets/pencil.png";
 import Trash from "./../assets/trash.png";
@@ -7,23 +8,78 @@ import Trash from "./../assets/trash.png";
 export default function createBody(project) {
   const bdy = document.createElement("main");
 
+  let tasks = filter(project);
+
   const title = document.createElement("h1");
   title.textContent = project;
 
   const allTasks = document.createElement("ul");
 
-  for (const key in tasks) {
-    tasks[key].forEach((task) => {
-      allTasks.appendChild(createAllTasks(task));
-    });
-  }
+  tasks.forEach((task) => {
+    allTasks.appendChild(createAllTasks(task));
+  });
 
   bdy.appendChild(title);
   bdy.appendChild(allTasks);
   return bdy;
 }
 
+function filter(project) {
+  let filteredTasks = [];
+
+  if (project === "All") {
+    for (const key in tasks) {
+      tasks[key].forEach((task) => filteredTasks.push(task));
+    }
+  } else if (project === "Today") {
+    for (const key in tasks) {
+      tasks[key].forEach((task) => {
+        if (task.dueDate.getDate() === new Date().getDate())
+          filteredTasks.push(task);
+      });
+    }
+  } else if (project === "This Week") {
+    for (const key in tasks) {
+      tasks[key].forEach((task) => {
+        if (differenceInWeeks(new Date(), task.dueDate) === 0)
+          filteredTasks.push(task);
+      });
+    }
+  } else if (project === "This Month") {
+    for (const key in tasks) {
+      tasks[key].forEach((task) => {
+        if (differenceInCalendarMonths(new Date(), task.dueDate) === 0)
+          filteredTasks.push(task);
+      });
+    }
+  } else {
+    tasks[project].forEach((task) => filteredTasks.push(task));
+  }
+
+  return filteredTasks;
+}
+
 function createAllTasks(task) {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  let spr = "th";
+
+  if (task.dueDate.getDate() === 1) spr = "st";
+  else if (task.dueDate.getDate() === 2) spr = "nd";
+  else if (task.dueDate.getDate() === 3) spr = "rd";
+
   const taskContainer = document.createElement("div");
   taskContainer.classList.add("task-container");
 
@@ -40,7 +96,9 @@ function createAllTasks(task) {
   front.appendChild(title);
 
   const dueDate = document.createElement("text");
-  dueDate.textContent = task.dueDate;
+  dueDate.innerHTML = `${task.dueDate.getDate()}<sup>${spr}</sup> ${
+    months[task.dueDate.getMonth()]
+  }`;
   dueDate.classList.add("date");
 
   const back = document.createElement("div");
