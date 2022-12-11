@@ -72,3 +72,11 @@ input[type=checkbox]:checked {
   cursor: pointer;
 }
 
+.checked {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.gray {
+  border-left: 3px solid gray;
+}

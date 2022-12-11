@@ -2,7 +2,6 @@ import tasks from "./coordinator";
 import "./../styles/body.css";
 import { differenceInWeeks, differenceInCalendarMonths } from "date-fns";
 
-import Pencil from "./../assets/pencil.png";
 import Trash from "./../assets/trash.png";
 
 export default function createBody(project) {
@@ -104,13 +103,20 @@ function createAllTasks(task) {
   const back = document.createElement("div");
 
   back.appendChild(dueDate);
-  back.appendChild(createImage(Pencil, "pencil"));
-  back.appendChild(createImage(Trash, "trash"));
+  const img = createImage(Trash, "trash");
+  back.appendChild(img);
 
   taskContainer.appendChild(front);
   taskContainer.appendChild(back);
 
   taskContainer.classList.add(`priority-${task.priority}`);
+
+  check.addEventListener("click", () => {
+    title.classList.toggle("checked");
+    dueDate.classList.toggle("checked");
+    taskContainer.classList.toggle("gray");
+  });
+
   return taskContainer;
 }
 
