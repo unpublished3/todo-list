@@ -1,0 +1,38 @@
+main {
+  padding: 20px 30px;
+}
+
+main>h1 {
+  color: #0421b2e8;
+}
+
+main>ul {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  gap: 15px;
+}
+
+.task-icons {
+  height: 25px;
+}
+
+.priority-1, .priority-2, .priority-3 {
+  background-color: #f0f0f0;
+  /* border: 1px solid #bdbbbb; */
+  padding: 10px 5px;
+  display: flex;
+  align-items: center;
+}
+
+.priority-1 {
+  border-left:3px solid red;
+}
+
+.priority-2 {
+  border-left:3px solid blue;
+}
+
+.priority-3 {
+  border-left:3px solid green;
+}
