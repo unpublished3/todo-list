@@ -1,5 +1,8 @@
 import "./../styles/titleBar.css";
 import Hamburger from "./../assets/hamburger.png";
+import { createForm } from "./form";
+
+const content = document.getElementById("content");
 
 export default function createTitleBar() {
   let divs = document.createElement("div");
@@ -13,7 +16,21 @@ export default function createTitleBar() {
   const text = document.createElement("span");
   text.textContent = "To-Do List";
 
-  divs.appendChild(hamburgerImage);
-  divs.appendChild(text);
+  const right = document.createElement("div");
+  right.classList.add("right");
+
+  const add = document.createElement("button");
+  add.classList.add("add");
+  add.textContent = "+";
+  // add.addEventListener("click", () => {
+  //   content.appendChild(createForm());
+  // });
+  content.appendChild(createForm());
+
+  right.appendChild(hamburgerImage);
+  right.appendChild(text);
+
+  divs.appendChild(right);
+  divs.appendChild(add);
   return divs;
 }

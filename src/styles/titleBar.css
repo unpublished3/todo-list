@@ -6,14 +6,28 @@
   color: white;
   display:  flex;
   align-items: center;
-  gap: 50px;
+  justify-content: space-between;
   box-sizing: border-box;
   grid-column: 1 / -1;
+}
+
+.right {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
 }
 
 .ham {
   height: 35px;
 }
 .ham:hover {
+  cursor: pointer;
+}
+
+.add {
+  background: none;
+  font-size: 30px;
+  color: white;
+  border: none;
   cursor: pointer;
 }
