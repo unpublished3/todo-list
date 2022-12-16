@@ -5,6 +5,8 @@ import tasks from "./coordinator";
 const content = document.getElementById("content");
 
 function updateSidebar() {
+  console.log(content.children);
+  content.removeChild(content.children[1]);
   content.removeChild(content.children[1]);
   content.removeChild(content.children[1]);
 

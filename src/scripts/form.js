@@ -1,24 +1,34 @@
 import "./../styles/form.css";
+import { updateSidebar, updateBody } from "./updateDOM";
+import Task from "./tasks";
+import addTask from "./add";
+import tasks from "./coordinator";
+
+const content = document.getElementById("content");
 
 export function createForm() {
   const divs = document.createElement("div");
-  const form = document.createElement("form");
-
   divs.classList.add("form-background");
+
+  const taskForm = document.createElement("form");
+  taskForm.id = "task-form";
+
   divs.addEventListener("click", (e) => {
     if (e.currentTarget === e.target) content.removeChild(content.children[3]);
   });
 
   const title = document.createElement("h1");
   title.textContent = "New Task";
-  form.appendChild(title);
-  form.appendChild(
+  taskForm.appendChild(title);
+  taskForm.appendChild(
     createFormElement("text", "task-title", "Title", "task-title")
   );
-  form.appendChild(
+  taskForm.appendChild(
     createFormElement("date", "due-date", "Due Date", "due-date")
   );
-  form.appendChild(createFormElement("text", "project", "Project", "project"));
+  taskForm.appendChild(
+    createFormElement("text", "project", "Project", "project")
+  );
 
   const radioContainer = document.createElement("fieldset");
   radioContainer.classList.add("radio-container");
@@ -37,14 +47,18 @@ export function createForm() {
     radioContainer.appendChild(radioButton)
   );
 
-  form.appendChild(radioContainer);
+  taskForm.appendChild(radioContainer);
   const btn = document.createElement("button");
   btn.textContent = "Add Task";
   btn.id = "add-task";
   btn.type = "button";
+  btn.addEventListener("click", () => {
+    // content.removeChild(content.children[3]);
+    getFormInput();
+  });
 
-  form.appendChild(btn);
-  divs.appendChild(form);
+  taskForm.appendChild(btn);
+  divs.appendChild(taskForm);
   return { divs, btn };
 }
 
@@ -64,6 +78,34 @@ function createFormElement(inputType, inputLabel, inputTC, htmlName) {
   container.appendChild(inp);
 
   if (inputType !== "radio") container.classList.add("container");
-  else container.classList.add("r-container");
+  else {
+    container.classList.add("r-container");
+    inp.value = inputLabel.substring(1);
+  }
   return container;
+}
+
+function getFormInput() {
+  const taskTitle = document.getElementById("task-title").value;
+  const dueDate = document.getElementById("due-date").value;
+  const project = document.getElementById("project").value;
+  const priority = Array.from(document.getElementsByName("radio"));
+  let priorityValue = "";
+
+  console.log(taskTitle);
+  console.log(dueDate);
+  console.log(project);
+
+  priority.forEach((radio) => {
+    if (radio.checked) priorityValue = radio.value;
+  });
+  // content.removeChild(content.children[1]);
+  // content.removeChild(content.children[1]);
+  // content.removeChild(content.children[1]);
+
+  addTask(
+    new Task(taskTitle, new Date(dueDate), priorityValue || 3, 0, project)
+  );
+  updateSidebar(tasks);
+  updateBody("All");
 }
