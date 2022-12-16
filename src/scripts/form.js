@@ -5,9 +5,9 @@ export function createForm() {
   const form = document.createElement("form");
 
   divs.classList.add("form-background");
-  // divs.addEventListener("click", (e) => {
-  //   if (e.currentTarget === e.target) content.removeChild(content.children[3]);
-  // });
+  divs.addEventListener("click", (e) => {
+    if (e.currentTarget === e.target) content.removeChild(content.children[3]);
+  });
 
   const title = document.createElement("h1");
   title.textContent = "New Task";
@@ -20,12 +20,17 @@ export function createForm() {
   );
   form.appendChild(createFormElement("text", "project", "Project", "project"));
 
-  const radioContainer = document.createElement("div");
+  const radioContainer = document.createElement("fieldset");
   radioContainer.classList.add("radio-container");
+
+  const radioLegend = document.createElement("legend");
+  radioLegend.textContent = "Priority";
+  radioContainer.appendChild(radioLegend);
+
   const radioButtons = [
-    createFormElement("radio", "r1", "1", "radio"),
-    createFormElement("radio", "r2", "3", "radio"),
-    createFormElement("radio", "r3", "2", "radio"),
+    createFormElement("radio", "r1", "High", "radio"),
+    createFormElement("radio", "r2", "Medium", "radio"),
+    createFormElement("radio", "r3", "Low", "radio"),
   ];
 
   radioButtons.forEach((radioButton) =>
@@ -33,7 +38,12 @@ export function createForm() {
   );
 
   form.appendChild(radioContainer);
+  const btn = document.createElement("button");
+  btn.textContent = "Add Task";
+  btn.id = "add-task";
+  btn.type = "button";
 
+  form.appendChild(btn);
   divs.appendChild(form);
   return divs;
 }
@@ -54,6 +64,6 @@ function createFormElement(inputType, inputLabel, inputTC, htmlName) {
   container.appendChild(inp);
 
   if (inputType !== "radio") container.classList.add("container");
-
+  else container.classList.add("r-container");
   return container;
 }
