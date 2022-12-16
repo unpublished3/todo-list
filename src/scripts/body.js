@@ -52,6 +52,8 @@ function filter(project) {
       });
     }
   } else {
+    // if (!tasks[project]) tasks[project] = [];
+    // console.log(project);
     tasks[project].forEach((task) => filteredTasks.push(task));
   }
 

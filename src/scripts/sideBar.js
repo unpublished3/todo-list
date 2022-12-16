@@ -1,8 +1,12 @@
+import createBody from "./body";
+
 import "./../styles/sideBar.css";
 import Date from "./../assets/date.png";
 import Month from "./../assets/month.png";
 import All from "./../assets/all.png";
 import Week from "./../assets/week.png";
+
+const content = document.getElementById("content");
 
 const createSideBar = (tasks) => {
   const divs = document.createElement("div");
@@ -39,6 +43,11 @@ function createTab(icon, imageAlt, tabText) {
   tab.appendChild(newImage);
   tab.appendChild(text);
   tab.id = tabText;
+  tab.addEventListener("click", () => {
+    content.removeChild(content.children[2]);
+    content.appendChild(createBody(tab.textContent));
+  });
+
   return tab;
 }
 

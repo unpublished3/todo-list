@@ -22,8 +22,9 @@ export default function createTitleBar() {
   const add = document.createElement("button");
   add.classList.add("add");
   add.textContent = "+";
-  add.addEventListener("click", () => {});
-  content.appendChild(createForm());
+  add.addEventListener("click", () => {
+    content.appendChild(createForm().divs);
+  });
 
   right.appendChild(hamburgerImage);
   right.appendChild(text);

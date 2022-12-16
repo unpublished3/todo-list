@@ -11,11 +11,12 @@ content.appendChild(createTitleBar());
 content.appendChild(createSideBar(tasks));
 content.appendChild(createBody("All"));
 
-const tabs = Array.from(document.getElementsByClassName("tab"));
+// import addTask from "./scripts/add";
+// import { updateSidebar, updateBody } from "./scripts/updateDOM";
+// import Task from "./scripts/tasks";
 
-tabs.forEach((tab) => {
-  tab.addEventListener("click", () => {
-    content.removeChild(content.children[2]);
-    content.appendChild(createBody(tab.textContent));
-  });
-});
+// setTimeout(() => {
+//   addTask(new Task("D", new Date("2022-12-6"), 2, 0, "p7"));
+//   updateSidebar();
+//   updateBody("All");
+// }, 2000);

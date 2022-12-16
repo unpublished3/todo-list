@@ -45,7 +45,7 @@ export function createForm() {
 
   form.appendChild(btn);
   divs.appendChild(form);
-  return divs;
+  return { divs, btn };
 }
 
 function createFormElement(inputType, inputLabel, inputTC, htmlName) {
