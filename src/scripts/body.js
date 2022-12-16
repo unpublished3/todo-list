@@ -3,6 +3,7 @@ import "./../styles/body.css";
 import { differenceInWeeks, differenceInCalendarMonths } from "date-fns";
 
 import Trash from "./../assets/trash.png";
+import { updateBody, updateSidebar } from "./updateDOM";
 
 export default function createBody(project) {
   const bdy = document.createElement("main");
@@ -106,6 +107,36 @@ function createAllTasks(task) {
 
   back.appendChild(dueDate);
   const img = createImage(Trash, "trash");
+  img.addEventListener("click", () => {
+    let newTasks = {};
+    for (const key in tasks) {
+      if (!newTasks[key]) newTasks[key] = [];
+      tasks[key].filter((t) => {
+        if (t.id !== task.id) newTasks[key].push(t);
+      });
+    }
+
+    console.log(newTasks);
+    console.log(tasks);
+
+    for (const key in tasks) {
+      delete tasks[key];
+    }
+
+    console.log("A   ", tasks);
+
+    for (const key in newTasks) {
+      if (!tasks[key]) tasks[key] = [];
+      newTasks[key].forEach((t) => tasks[key].push(t));
+    }
+
+    console.log("B   ", tasks);
+
+    localStorage.removeItem("tasks");
+    updateSidebar();
+    updateBody("All");
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  });
   back.appendChild(img);
 
   taskContainer.appendChild(front);
@@ -113,10 +144,20 @@ function createAllTasks(task) {
 
   taskContainer.classList.add(`priority-${task.priority}`);
 
+  if (check.checked) {
+    title.classList.toggle("checked");
+    dueDate.classList.toggle("checked");
+    taskContainer.classList.toggle("gray");
+  }
+
   check.addEventListener("click", () => {
     title.classList.toggle("checked");
     dueDate.classList.toggle("checked");
     taskContainer.classList.toggle("gray");
+    task.check = !task.check;
+
+    localStorage.removeItem(tasks);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   });
 
   return taskContainer;

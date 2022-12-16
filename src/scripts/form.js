@@ -92,20 +92,26 @@ function getFormInput() {
   const priority = Array.from(document.getElementsByName("radio"));
   let priorityValue = "";
 
-  console.log(taskTitle);
-  console.log(dueDate);
-  console.log(project);
-
   priority.forEach((radio) => {
     if (radio.checked) priorityValue = radio.value;
   });
-  // content.removeChild(content.children[1]);
-  // content.removeChild(content.children[1]);
-  // content.removeChild(content.children[1]);
+
+  let newID = 0;
+  for (const key in tasks) {
+    tasks[key].forEach(() => newID++);
+  }
 
   addTask(
-    new Task(taskTitle, new Date(dueDate), priorityValue || 3, 0, project)
+    new Task(
+      newID + 1,
+      taskTitle,
+      new Date(dueDate),
+      priorityValue || 3,
+      0,
+      project
+    )
   );
+  content.removeChild(content.children[1]);
   updateSidebar(tasks);
   updateBody("All");
 }
